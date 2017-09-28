@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="a79ff419-cd05-4fd5-b4ef-22b94d19f8c5" ChangeDateTime="04/02/2017 20:10:33">
+    <Property Name="ElementName" Value="[dbo].[Songs].[id_composition]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Songs]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="id_song" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="99e90ea1-cce5-4697-912d-390480320a15" ChangeDateTime="04/02/2017 20:10:41">
+    <Property Name="ElementName" Value="[dbo].[Songs].[id_song]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Songs]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Id_song" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9cb2be44-3b41-45a9-9431-27d63ca616c5" ChangeDateTime="09/26/2017 20:44:52">
+    <Property Name="ElementName" Value="[dbo].[Songs].[Image]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Songs]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Path_image" />
+  </Operation>
+</Operations>

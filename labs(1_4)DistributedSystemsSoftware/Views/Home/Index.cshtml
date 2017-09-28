@@ -1,14 +1,81 @@
 ﻿@{
-    ViewBag.Title = "Л. Р. 1-4 ПОрИС";
+    
 }
 
+<header></header>
+<div class="body-content col-sm-12 col-12 col-md-12 col-lg-10 col-xl-10 col-xxl-7">
+    <div class="col-md-3 left-sidebar card" id="Func" role="tablist">
+        <ul class="subjects">
+            <li id="pris" subject="pris" class="">
+                <label>ПО распреденённых интеллектуальных систем</label>
+                <ul>
+                    <li data-toggle="modal" data-target="#myModal" data-subject="pris" data-whatever="Добавление песни" data-href="/Home/SongUpload"><a class=""><i class="fa fa-plus-circle" aria-hidden="true"></i>Добавить песню</a></li>
+                </ul>
+            </li>
+            <li id="oedCS" subject="oedCS" class="">
+                <label>Обработка экспериментальных данных на ЭОМ</label>
+                <ul>
+                    <li lr="oedCS" number="0"><a class="" role="button">Л. Р. №1</a></li>
+                    <li lr="oedCS" number="1"><a class="" role="button">Л. Р. №2</a></li>
+                    <li lr="oedCS" number="2"><a class="" role="button">Л. Р. №3</a></li>
+                    <li lr="oedCS" number="3"><a class="" role="button">Л. Р. №4</a></li>
+                </ul>
+<!--                <a class="btn" href="" role="button"><i class="fa" aria-hidden="true"></i>Обработка экспериментальных данных на ЭОМ</a>-->
+            </li>
+            <li id="kpp" subject="KPP" class="">
+                <label>Кросс- платформенное программирование</label>
+                <ul>
+                    <li lr="kpp" number="0"><a class="" role="button">Л. Р. №1</a></li>
+                    <li lr="kpp" number="1"><a class="" role="button">Л. Р. №2</a></li>
+                    <li lr="kpp" number="2"><a class="" role="button">Л. Р. №3</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="menu-selector"></div>
+        <div id="chatBody" class="">
+            <div id="message"></div>
+        </div>
+    </div>
+    <div class="col col-md-9 right-sidebar offset-md-3">
+        <div id="content" class="sm2-bar-ui compact full-width flat card">
 
-<header>
-
-</header>
-<div class="body-content">
-    <h1>Hello!</h1>
+        </div>
+    </div>
 </div>
-<footer>
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Добавление песни</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="uploar-container" role="main">
+                    <form method="post" enctype="multipart/form-data" novalidate class="box" id="fileForm" source>
+                        <div class="box__input">
+                            <svg class="box__icon" xmlns="http://www.w3.org/2000/svg" width="50" height="43" viewBox="0 0 50 43"><path d="M48.4 26.5c-.9 0-1.7.7-1.7 1.7v11.6h-43.3v-11.6c0-.9-.7-1.7-1.7-1.7s-1.7.7-1.7 1.7v13.2c0 .9.7 1.7 1.7 1.7h46.7c.9 0 1.7-.7 1.7-1.7v-13.2c0-1-.7-1.7-1.7-1.7zm-24.5 6.1c.3.3.8.5 1.2.5.4 0 .9-.2 1.2-.5l10-11.6c.7-.7.7-1.7 0-2.4s-1.7-.7-2.4 0l-7.1 8.3v-25.3c0-.9-.7-1.7-1.7-1.7s-1.7.7-1.7 1.7v25.3l-7.1-8.3c-.7-.7-1.7-.7-2.4 0s-.7 1.7 0 2.4l10 11.6z" /></svg>
+                            <input type="file" name="files[]" id="file" class="box__file" data-multiple-caption="{count} files selected" multiple />
+                            <label for="file"><strong>Выберете файл</strong><span class="box__dragndrop"> или перетащите сюда</span>.</label>
+                        </div>
+                        <textarea id="sDescription" class="form-control sDescription" placeholder="Описание к песни"></textarea>
 
-</footer>
+
+                        <div class="box__uploading">Загрузка&hellip;</div>
+                        <div class="box__success">Готово! <a href="" class="box__restart" role="button">Загрузить ещё?</a></div>
+                        <div class="box__error">Ошибка! <a href="" class="box__restart" role="button">Попробуйте снова!</a></div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                <button id="SubmitBtn" type="button" class="btn btn-primary">Загрузить</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="notifier" class="notifier card hidden"></div>
+<footer></footer>

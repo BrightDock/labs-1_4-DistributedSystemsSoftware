@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Authors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="70" Nullable="false" />
+          <Property Name="Country" Type="nchar" MaxLength="25" />
+          <Property Name="Description" Type="text" />
+        </EntityType>
+        <EntityType Name="Songs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_author" Type="bigint" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Length" Type="time" Precision="7" />
+          <Property Name="Year" Type="smallint" />
+          <Property Name="Path_location" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Path_image" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Songs_descriptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_song" Type="bigint" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="values_table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="value" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Songs_descriptions_PK_Songs">
+          <End Role="Songs" Type="Self.Songs" Multiplicity="1" />
+          <End Role="Songs_descriptions" Type="Self.Songs_descriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Songs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Songs_descriptions">
+              <PropertyRef Name="Id_song" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Songs_PK_Authors">
+          <End Role="Authors" Type="Self.Authors" Multiplicity="1" />
+          <End Role="Songs" Type="Self.Songs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Songs">
+              <PropertyRef Name="Id_author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Authors" EntityType="Self.Authors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Songs" EntityType="Self.Songs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Songs_descriptions" EntityType="Self.Songs_descriptions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="values_table" EntityType="Self.values_table" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Songs_descriptions_PK_Songs" Association="Self.FK_Songs_descriptions_PK_Songs">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="Songs_descriptions" EntitySet="Songs_descriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Songs_PK_Authors" Association="Self.FK_Songs_PK_Authors">
+            <End Role="Authors" EntitySet="Authors" />
+            <End Role="Songs" EntitySet="Songs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Authors">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="70" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Country" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Songs" Relationship="Self.FK_Songs_PK_Authors" FromRole="Authors" ToRole="Songs" />
+        </EntityType>
+        <EntityType Name="Songs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_author" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Length" Type="Time" Precision="7" />
+          <Property Name="Year" Type="Int16" />
+          <Property Name="Path_location" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Authors" Relationship="Self.FK_Songs_PK_Authors" FromRole="Songs" ToRole="Authors" />
+          <NavigationProperty Name="Songs_descriptions" Relationship="Self.FK_Songs_descriptions_PK_Songs" FromRole="Songs" ToRole="Songs_descriptions" />
+          <Property Name="Path_image" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Songs_descriptions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_song" Type="Int64" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Songs" Relationship="Self.FK_Songs_descriptions_PK_Songs" FromRole="Songs_descriptions" ToRole="Songs" />
+        </EntityType>
+        <Association Name="FK_Songs_PK_Authors">
+          <End Role="Authors" Type="Self.Authors" Multiplicity="1" />
+          <End Role="Songs" Type="Self.Songs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authors">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Songs">
+              <PropertyRef Name="Id_author" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Songs_descriptions_PK_Songs">
+          <End Role="Songs" Type="Self.Songs" Multiplicity="1" />
+          <End Role="Songs_descriptions" Type="Self.Songs_descriptions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Songs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Songs_descriptions">
+              <PropertyRef Name="Id_song" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="labDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__RefactorLog" EntityType="Self.C__RefactorLog" />
+          <EntitySet Name="Authors" EntityType="Self.Authors" />
+          <EntitySet Name="Songs" EntityType="Self.Songs" />
+          <EntitySet Name="Songs_descriptions" EntityType="Self.Songs_descriptions" />
+          <AssociationSet Name="FK_Songs_PK_Authors" Association="Self.FK_Songs_PK_Authors">
+            <End Role="Authors" EntitySet="Authors" />
+            <End Role="Songs" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Songs_descriptions_PK_Songs" Association="Self.FK_Songs_descriptions_PK_Songs">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="Songs_descriptions" EntitySet="Songs_descriptions" />
+          </AssociationSet>
+          <EntitySet Name="values_table" EntityType="Model.values_table" />
+        </EntityContainer>
+        <EntityType Name="values_table">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="value" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="labDB">
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="Model.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Authors">
+            <EntityTypeMapping TypeName="Model.Authors">
+              <MappingFragment StoreEntitySet="Authors">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Songs">
+            <EntityTypeMapping TypeName="Model.Songs">
+              <MappingFragment StoreEntitySet="Songs">
+                <ScalarProperty Name="Path_image" ColumnName="Path_image" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_author" ColumnName="Id_author" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Path_location" ColumnName="Path_location" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Songs_descriptions">
+            <EntityTypeMapping TypeName="Model.Songs_descriptions">
+              <MappingFragment StoreEntitySet="Songs_descriptions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Id_song" ColumnName="Id_song" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="values_table">
+            <EntityTypeMapping TypeName="Model.values_table">
+              <MappingFragment StoreEntitySet="values_table">
+                <ScalarProperty Name="value" ColumnName="value" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

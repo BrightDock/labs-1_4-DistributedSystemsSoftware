@@ -1,0 +1,15 @@
+﻿@model IEnumerable<labs_1_4_DistributedSystemsSoftware.Models.mPlayerSong>
+
+@foreach (var song in Model)
+{
+    <li>
+        <a href="@song.SongPath" sId="@song.SongId" data-background="@song.SongBckgImage"><div class="song-icon"></div>@song.AuthorName - 
+            <div class="song-name">@song.SongName</div>
+            <div class="song-duration">@song.SongLength.Value.ToString(@"mm\:ss")</div>
+        </a>
+        <div class="song-discription">
+            <div>@song.SongYear</div>
+            <div>@song.SongDescription</div>
+        </div>
+    </li>
+}

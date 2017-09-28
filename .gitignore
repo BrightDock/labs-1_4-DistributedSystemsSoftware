@@ -240,3 +240,8 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+/labs(1_4)DistributedSystemsSoftware/Files
+/WcfService/Web.Release.config
+/WcfService/Web.Debug.config
+/WcfService/Web.config
+*.pubxml

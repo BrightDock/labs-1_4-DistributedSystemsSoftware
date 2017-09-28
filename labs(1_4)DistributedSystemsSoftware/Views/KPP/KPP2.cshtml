@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Л. Р. 2 К-ПП";
+    int i = 0;
+}
+
+<script type="text/javascript">
+    title = '@(ViewBag.Title)';
+</script>
+
+<div class="p-a-1 pb-0">
+    <div class="labHead row">
+        <h4 class="col-12">CORBA (COM)</h4>
+    </div>
+    <div class="labTail p-a-1 row">
+        <div class="labLeft col-12 col-sm-7 col-md-12 col-xl-7">
+            @foreach (var item in Model)
+            {
+                <div class='row flex-nowrap'>
+                    <p class='col col-6 align-self-center mb-0'>
+                        @{i++; }
+                        Песня №@i
+                    </p>
+                    <p class='col align-self-stretch divider mb-0'></p>
+                    <p class='col align-self-center mb-0'>
+                        Название: @item.Name<br />
+                        Длина: @item.Length.ToString(@"mm\:ss")
+                    </p>
+                </div>
+             }
+        </div>
+        <div class="labRight col-12 col-sm-5 col-md-12 col-xl-5">
+
+        </div>
+    </div>
+    <div class="LabConclusion">
+
+    </div>
+    <div class="progressLoader" data-percent="0">
+        <div class="ppc-progress">
+            <div class="ppc-progress-fill"></div>
+        </div>
+        <div class="ppc-percents">
+            <div class="pcc-percents-wrapper">
+                <span>%</span>
+            </div>
+        </div>
+    </div>
+    <div class="navLab row justify-content-between">
+        <div class="navBtn navLeft">Предыдущая</div>
+        <div class="navBtn navRight">Следющая</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var $ppc = $('.progressLoader'),
+        percent = parseInt($ppc.data('percent')),
+        deg = 360 * percent / 100;
+    if (percent > 50) {
+        $ppc.addClass('gt-50');
+    }
+    $('.ppc-progress-fill').css('transform', 'rotate(' + deg + 'deg)');
+    $('.ppc-percents span').html(percent + '%');
+</script>

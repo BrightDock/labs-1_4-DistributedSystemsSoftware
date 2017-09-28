@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "Л. Р. ОЭД";
+}
+
+@Scripts.Render("http://canvasjs.com/assets/script/canvasjs.min.js")
+@Scripts.Render("~/bundles/coolButtons")
+
+<script type="text/javascript">
+    document.title = '@(ViewBag.Title)';
+
+    $(function () {
+        $("#kpp ul > li").unbind('click');
+        $("#kpp ul > li").click(function (e) {
+            var subMenuElem = $(this);
+
+            if (!subMenuElem.hasClass("selected")) {
+                subMenuElem.parent("ul").find("li").removeClass("selected");
+                subMenuElem.toggleClass("selected");
+
+                $(".menu-selector").css({
+                    "height": subMenuElem.outerHeight(),
+                    "top": subMenuElem.position().top
+                });
+
+                var data = new FormData();
+                data.append("lab", (subMenuElem.attr("lr") + subMenuElem.attr("number")));
+                //                alert(subMenuElem.attr("lr") + +subMenuElem.attr("number"));
+                var tempCookie = getCookie("file");
+                //                deleteCookie("file");
+                $.ajax({
+                    type: "GET",
+                    url: "/KPP/" + subMenuElem.attr("lr") + +subMenuElem.attr("number"),
+                    contentType: false,
+                    processData: false,
+                    cashe: false,
+                    success: function (result) {
+                        $("#content").empty();
+                        $("#content").append(result);
+                        document.title = title;
+                        setCookie("file", tempCookie);
+/*                        if (getCookie("file").length > 0) {
+                            $.ajax({
+                                type: "GET",
+                                url: "/kpp/" + subMenuElem.attr("lr") + +subMenuElem.attr("number"),
+                                contentType: false,
+                                processData: false,
+                                data: data,
+                                cashe: false
+                            });
+                        }*/
+
+                        parseInt(subMenuElem.attr("number")) > 0 ?
+                            function () { } : $(".navBtn.navLeft").addClass("disabled");
+                        parseInt(subMenuElem.attr("number")) === ($("#kpp ul > li").length - 1) ?
+                            $(".navBtn.navRight").addClass("disabled") : function () { };
+
+                        $(".navBtn").unbind('click');
+                        $(".navBtn").click(function () {
+                            var elem = $(this);
+                            if (!elem.hasClass("disabled")) {
+                                var number;
+
+                                if (elem.hasClass("navLeft")) {
+                                    number = parseInt($("#kpp ul > li.selected").attr("number")) - 1;
+                                }
+                                else if (elem.hasClass("navRight")) {
+                                    number = parseInt($("#kpp ul > li.selected").attr("number")) + 1;
+                                }
+                                $($("#kpp ul > li")[number]).trigger("click", this);
+                            }
+                        });
+                    },
+                    error: function (xhr, status, p3) {
+                        $('#notifier').removeClass("hidden");
+                        $('#notifier').html("Ошибка загрузки данных<br />Пожалуйста, обновите страницу");
+                        /*                setTimeout(function () {
+                                            $('#notifier').hide();
+                                        }, 200);*/
+                    }
+                });
+            }
+        });
+        $("#kpp ul > li:first-child").trigger("click", this);
+    });
+</script>
+
+<div class="p-a-1">
+    <div class="labHead row">
+        <h2 class="subject-name text-center col-12">Кросс- платформенное программирование</h2>
+    </div>
+    <div class="loader">
+        <div class="loader__figure"></div>
+        <p class="loader__label">Загрузка</p>
+    </div>
+    <!--    <div class="">
+            <a class="btn" href="" role="button" data-subject="oedCS" data-toggle="modal" data-target="#myModal" data-whatever="Добавление данных" data-href="/Home/DataUpload"><i class="fa fa-plus-circle" aria-hidden="true"></i>Файл с данными</a>
+        </div>-->
+</div>
+
+<script type="text/javascript">
+</script>
+

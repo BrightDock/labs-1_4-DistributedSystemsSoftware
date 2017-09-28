@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "Л. Р. 0 К-ПП";
+}
+
+<script type="text/javascript">
+    title = '@(ViewBag.Title)';
+</script>
+
+<div class="p-a-1 pb-0">
+    <div class="labHead row">
+        <h4 class="col-12">Статические способы доступа к БД</h4>
+    </div>
+    <div class="labTail p-a-1 row">
+        <div class="alert alert-info col-12 form-group row col-12 pt-3 pb-3" id="dataCount">
+            <label for="example-number-input" class="col-4 col-form-label">Количество значений</label>
+            <div class="col-4">
+                <input class="form-control" type="number" value="42" id="example-number-input">
+            </div>
+            <div class="progress-button elastic col-4">
+                <button><span>Подтвердить</span></button>
+                <svg class="progress-circle" width="38px" height="38px" viewBox="0, 38px, 38px, 0"><path d="m35,2.5c17.955803,0 32.5,14.544199 32.5,32.5c0,17.955803 -14.544197,32.5 -32.5,32.5c-17.955803,0 -32.5,-14.544197 -32.5,-32.5c0,-17.955801 14.544197,-32.5 32.5,-32.5z" /></svg>
+                <svg class="checkmark" width="38px" height="38px" viewBox="0, 38px, 38px, 0"><path d="m31.5,46.5l15.3,-23.2" /><path d="m31.5,46.5l-8.5,-7.1" /></svg>
+                <svg class="cross" width="38px" height="38px" viewBox="0, 38px, 38px, 0"><path d="m35,35l-9.3,-9.3" /><path d="m35,35l9.3,9.3" /><path d="m35,35l-9.3,9.3" /><path d="m35,35l9.3,-9.3" /></svg>
+            </div><!-- /progress-button -->
+        </div>
+        <div class="labLeft col-12 col-sm-7 col-md-12 col-xl-7">
+
+        </div>
+        <div class="labRight col-12 col-sm-5 col-md-12 col-xl-5">
+
+        </div>
+    </div>
+    <div class="LabConclusion">
+
+    </div>
+    <div class="progressLoader" data-percent="0">
+        <div class="ppc-progress">
+            <div class="ppc-progress-fill"></div>
+        </div>
+        <div class="ppc-percents">
+            <div class="pcc-percents-wrapper">
+                <span>%</span>
+            </div>
+        </div>
+    </div>
+    <div class="navLab row justify-content-between">
+        <div class="navBtn navLeft">Предыдущая</div>
+        <div class="navBtn navRight">Следющая</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    if ($(window).width() > 767) {
+        $("#dataCount").trigger("sticky_kit:detach");
+        $("#dataCount").stick_in_parent({ offset_top: 0 });
+    }
+    else {
+        $("#dataCount").trigger("sticky_kit:detach");
+    }
+    $(window).resize(function () {
+        if ($(window).width() > 767) {
+            $("#dataCount").trigger("sticky_kit:detach");
+            $("#dataCount").stick_in_parent({ offset_top: 0 });
+        }
+        else {
+            $("#dataCount").trigger("sticky_kit:detach");
+        }
+    });
+
+    [].slice.call(document.querySelectorAll('.progress-button')).forEach(function (bttn, pos) {
+        new UIProgressButton(bttn, {
+            callback: function (instance) {
+                $.ajax({ method: 'get', url: '/KPP/OleDBConnect', data: { dataCount: $('#dataCount input').val() } });
+                var progress = 0,
+                    interval = setInterval(function () {
+                        progress = Math.min(progress + Math.random() * 0.1, 1);
+                        instance.setProgress(progress);
+
+                        if (progress === 1) {
+                            instance.stop(pos === 1 || pos === 3 ? -1 : 1);
+                            clearInterval(interval);
+                        }
+                    }, 150);
+            }
+        });
+    });
+
+    var $ppc = $('.progressLoader'),
+        percent = parseInt($ppc.data('percent')),
+        deg = 360 * percent / 100;
+    if (percent > 50) {
+        $ppc.addClass('gt-50');
+    }
+    $('.ppc-progress-fill').css('transform', 'rotate(' + deg + 'deg)');
+    $('.ppc-percents span').html(percent + '%');
+</script>

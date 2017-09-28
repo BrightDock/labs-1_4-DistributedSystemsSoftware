@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Л. Р. 2 ОЭД";
+}
+
+<script type="text/javascript">
+    title = '@(ViewBag.Title)';
+</script>
+
+<div class="p-a-1 pb-0">
+    <div class="labHead row">
+        <h4 class="col-10">Выбор аналитической модели закона распределения экспериментальных данных</h4>
+        <h6 class="col-4 hidden-xs-up"><b style="margin-right: .5em;">Студент:</b>Куз Д. В.<br /><b>Группа:</b> 4141</h6>
+        <a class="addFile col-2 btn btn-primary" href="" role="button" data-subject="oedCS" data-toggle="modal" data-target="#myModal" data-whatever="Добавление данных" data-href="/oed/dataUpload"><i class="fa fa-plus-circle" aria-hidden="true"></i><span>Данные</span></a>
+    </div>
+    <div class="labTail p-a-1 row">
+        <h6 class="alert alert-info col-12">
+            Добавьте данные для обработки
+        </h6>
+        <div class="labLeft col-12 col-sm-7 col-md-12 col-xl-7">
+
+        </div>
+        <div class="labRight col-12 col-sm-5 col-md-12 col-xl-5">
+
+        </div>
+    </div>
+    <div class="LabConclusion">
+
+    </div>
+    @if (!string.IsNullOrEmpty(ViewBag.message)) {
+        <h5>@ViewBag.message</h5>
+    }
+    <div class="progressLoader" data-percent="0">
+        <div class="ppc-progress fa-spin">
+            <div class="ppc-progress-fill fa-spin"></div>
+        </div>
+        <div class="ppc-percents">
+            <div class="pcc-percents-wrapper">
+                <span>%</span>
+            </div>
+        </div>
+    </div>
+    <div class="navLab row justify-content-between">
+        <div class="navBtn navLeft">Предыдущая</div>
+        <div class="navBtn navRight">Следющая</div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    var $ppc = $('.progressLoader'),
+        percent = parseInt($ppc.data('percent')),
+        deg = 360 * percent / 100;
+    if (percent > 50) {
+        $ppc.addClass('gt-50');
+    }
+    $('.ppc-progress-fill').css('transform', 'rotate(' + deg + 'deg)');
+    $('.ppc-percents span').html(percent + '%');
+</script>
