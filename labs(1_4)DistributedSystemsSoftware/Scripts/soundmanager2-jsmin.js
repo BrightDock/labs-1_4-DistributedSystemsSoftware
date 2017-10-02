@@ -1884,11 +1884,16 @@
                 if (s.url) {
                     s._iO.url = s.url;
                 }
+
+                // set's the background image
                 $("#bckg-img").fadeOut(500);
                 setTimeout(function () {
                     $("#bckg-img").attr("src", $(".sm2-playlist-bd > li.selected > a").attr("data-background"));
                     $("#bckg-img").fadeIn(1500);
                 }, 500);
+
+                //set's the title on page
+                document.title = $(".sm2-playlist-bd > li.selected > a").attr("title");
 
                 // mix in any options defined at createSound()
                 s._iO = mixin(s._iO, s.options);

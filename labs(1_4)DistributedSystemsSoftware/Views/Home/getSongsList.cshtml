@@ -3,7 +3,8 @@
 @foreach (var song in Model)
 {
     <li>
-        <a href="@song.SongPath" sId="@song.SongId" data-background="@song.SongBckgImage"><div class="song-icon"></div>@song.AuthorName - 
+        <a href="@song.SongPath" sId="@song.SongId" data-background="@song.SongBckgImage" title="@song.AuthorName.Trim() - @song.SongName.Trim()">
+            <div class="song-icon"></div>@song.AuthorName - 
             <div class="song-name">@song.SongName</div>
             <div class="song-duration">@song.SongLength.Value.ToString(@"mm\:ss")</div>
         </a>
