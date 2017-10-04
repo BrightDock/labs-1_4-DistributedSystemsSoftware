@@ -101,7 +101,8 @@
             progressTrack: null,
             progressBar: null,
             duration: null,
-            volume: null
+            volume: null,
+            looped: null
         };
 
         // prepended to tracks when a sound fails to load/play
@@ -350,6 +351,12 @@
             // if a link is OK, play it.
 
             if (soundManager.canPlayURL(link.href)) {
+
+                if (soundObject) {
+                    if (soundObject.url === link.href) {
+                        return soundObject.togglePause();
+                    }
+                }
 
                 // if there's a timer due to failure to play one track, cancel it.
                 // catches case when user may use previous/next after an error.
@@ -627,6 +634,7 @@
                 dom.playlistTarget = utils.dom.get(dom.o, '.sm2-playlist-target');
                 dom.playlistContainer = utils.dom.get(dom.o, '.sm2-playlist-drawer');
                 dom.playlist = utils.dom.get(dom.o, '.sm2-playlist-bd');
+                dom.looped = utils.dom.get(dom.o, '.sm2-loop');
 
             }
 
@@ -1227,6 +1235,13 @@
 
                 defaultVolume = volume;
 
+            },
+
+            loop: function () {
+                if (soundObject) {
+                    soundObject._a.loop = !soundObject._a.loop;
+                    utils.css.toggle(dom.looped, 'text-muted');
+                }
             }
 
         };

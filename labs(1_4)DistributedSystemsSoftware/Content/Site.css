@@ -354,6 +354,27 @@ textarea {
     text-decoration: none;
 }
 
+a.sm2-inline-button:before {
+    font-size: 1rem;
+    vertical-align: middle;
+}
+
+a.sm2-inline-button.fa.fa-caret-left {
+    margin-right: .5rem;
+}
+
+a.sm2-inline-button.fa.fa-caret-right {
+    margin-left: .5rem;
+}
+
+    a.sm2-inline-button.fa.fa-caret-right:before, a.sm2-inline-button.fa.fa-caret-left:before {
+        font-size: 1.75rem;
+    }
+
+a.sm2-loop.sm2-inline-button.fa.fa-repeat {
+    vertical-align: text-bottom;
+}
+
 .sm2-playlist-bd {
     width: 100%;
     display: block;

@@ -67,11 +67,11 @@
 
             'url': (smURL || null),             // path (directory) where SoundManager 2 SWFs exist, eg., /path/to/swfs/
             'flashVersion': 8,                  // flash build to use (8 or 9.) Some API features require 9.
-            'debugMode': true,                  // enable debugging output (console.log() with HTML fallback)
+            'debugMode': false,                  // enable debugging output (console.log() with HTML fallback)
             'debugFlash': false,                // enable debugging output inside SWF, troubleshoot Flash/browser issues
             'useConsole': true,                 // use console.log() if available (otherwise, writes to #soundmanager-debug element)
             'consoleOnly': true,                // if console is being used, do not create/write to #soundmanager-debug
-            'waitForWindowLoad': false,         // force SM2 to wait for window.onload() before trying to call soundManager.onload()
+            'waitForWindowLoad': true,         // force SM2 to wait for window.onload() before trying to call soundManager.onload()
             'bgColor': '#ffffff',               // SWF background color. N/A when wmode = 'transparent'
             'useHighPerformance': false,        // position:fixed flash movie can help increase js/flash speed, minimize lag
             'flashPollingInterval': null,       // msec affecting whileplaying/loading callback frequency. If null, default of 50 msec is used.
@@ -81,7 +81,7 @@
             'allowScriptAccess': 'always',      // for scripting the SWF (object/embed property), 'always' or 'sameDomain'
             'useFlashBlock': false,             // *requires flashblock.css, see demos* - allow recovery from flash blockers. Wait indefinitely and apply timeout CSS to SWF, if applicable.
             'useHTML5Audio': true,              // use HTML5 Audio() where API is supported (most Safari, Chrome versions), Firefox (MP3/MP4 support varies.) Ideally, transparent vs. Flash API where possible.
-            'forceUseGlobalHTML5Audio': false,  // if true, a single Audio() object is used for all sounds - and only one can play at a time.
+            'forceUseGlobalHTML5Audio': true,  // if true, a single Audio() object is used for all sounds - and only one can play at a time.
             'ignoreMobileRestrictions': false,  // if true, SM2 will not apply global HTML5 audio rules to mobile UAs. iOS > 7 and WebViews may allow multiple Audio() instances.
             'html5Test': /^(probably|maybe)$/i, // HTML5 Audio() format support test. Use /^probably$/i; if you want to be more conservative.
             'preferFlash': false,               // overrides useHTML5audio, will use Flash for MP3/MP4/AAC if present. Potential option if HTML5 playback with these formats is quirky.
@@ -4314,7 +4314,7 @@
             return result;
 
         };
-
+        
         testHTML5 = function () {
 
             /**
