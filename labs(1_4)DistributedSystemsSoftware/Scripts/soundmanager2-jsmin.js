@@ -1893,7 +1893,16 @@
                 }, 500);
 
                 //set's the title on page
-                document.title = $(".sm2-playlist-bd > li.selected > a").attr("title");
+                var currentSong = $(".sm2-playlist-bd > li.selected > a");
+                document.title = currentSong.attr("title");
+
+                // set's position of scroll to current song
+                if (currentSong.offset().top + currentSong.height() > (document.documentElement.scrollTop + $(window).height()) ||
+                    currentSong.offset().top - currentSong.height() < document.documentElement.scrollTop) {
+                    $('html, body').animate({
+                        scrollTop: currentSong.position().top + (currentSong.height() * 1.5) - ($(window).height() / 2)
+                    }, 200);
+                }
 
                 // mix in any options defined at createSound()
                 s._iO = mixin(s._iO, s.options);
