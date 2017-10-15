@@ -481,8 +481,8 @@ sm2-bar-ui.paused a.play-pause:before, .sm2-bar-ui a.play-pause:before {
 .sm2-progress .sm2-progress-track, .sm2-progress .sm2-progress-ball, .sm2-progress .sm2-progress-bar {
     position: relative;
     width: 100%;
-    height: 0.2em;
-    border-radius: 0.1em;
+    height: 0.25em;
+    border-radius: .1em;
 }
 
 .sm2-progress .sm2-progress-bar {
@@ -490,7 +490,7 @@ sm2-bar-ui.paused a.play-pause:before, .sm2-bar-ui a.play-pause:before {
     left: 0px;
     top: 0px;
     width: 0px;
-    border-radius: 0;
+    border-radius: 1em;
     background-color: #49a555;
     transition: all ease;
 }
@@ -556,14 +556,12 @@ sm2-bar-ui.paused a.play-pause:before, .sm2-bar-ui a.play-pause:before {
 }
 
 .sm2-playlist-wrapper .sm2-playlist-bd li {
-    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    padding: 0 .5em;
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    padding: 0 1em;
     list-style: none;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    margin: 0 10px;
-    border-radius: 3px;
     transition: all .2s ease;
 }
 
