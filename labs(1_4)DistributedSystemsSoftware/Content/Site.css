@@ -556,7 +556,7 @@ sm2-bar-ui.paused a.play-pause:before, .sm2-bar-ui a.play-pause:before {
 }
 
 .sm2-playlist-wrapper .sm2-playlist-bd li {
-    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-family: system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     padding: 0 1em;
     list-style: none;
     text-overflow: ellipsis;

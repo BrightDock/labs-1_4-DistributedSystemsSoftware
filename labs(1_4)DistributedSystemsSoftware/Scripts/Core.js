@@ -463,12 +463,11 @@ $(function () {
                 // ajax request
                 var subMenuElem = $("#oedCS ul > li.selected");
                 var data = new FormData();
-                data.append("file", document.getElementById("file").files[0]);
+                data.append("file", droppedFiles[0]);
                 data.append("SDescription", document.getElementById("sDescription").value);
                 data.append("userID", getCookie('userID'));
                 data.append("lab", (subMenuElem.attr("lr") + +subMenuElem.attr("number")));
-//                alert(subMenuElem.attr("lr") + +subMenuElem.attr("number"));
-                setCookie('file', document.getElementById("file").files[0].name.replace(/^.*[\\\/]/, ''));
+                setCookie('file', droppedFiles[0].name.replace(/^.*[\\\/]/, ''));
                 $.ajax({
                     type: form.getAttribute('method'),
                     url: form.getAttribute("action"),
