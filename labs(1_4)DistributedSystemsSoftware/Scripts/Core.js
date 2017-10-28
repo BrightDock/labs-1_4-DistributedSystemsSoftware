@@ -453,21 +453,21 @@ $(function () {
                 e.preventDefault();
 
                 // gathering the form data
-                var ajaxData = new FormData(form);
-                if (droppedFiles) {
+                var data = new FormData();
+/*                if (droppedFiles) {
                     Array.prototype.forEach.call(droppedFiles, function (file) {
-                        ajaxData.append(input.getAttribute('name'), file);
+                        data.append("file", input.getAttribute('name'), file);
                     });
-                }
+                }*/
 
                 // ajax request
                 var subMenuElem = $("#oedCS ul > li.selected");
-                var data = new FormData();
-                data.append("file", droppedFiles[0]);
+                data.append("file", (droppedFiles.length > 0 ? droppedFiles[0] : input.files[0]));
                 data.append("SDescription", document.getElementById("sDescription").value);
                 data.append("userID", getCookie('userID'));
                 data.append("lab", (subMenuElem.attr("lr") + +subMenuElem.attr("number")));
-                setCookie('file', droppedFiles[0].name.replace(/^.*[\\\/]/, ''));
+                console.log(droppedFiles);
+                setCookie('file', (droppedFiles.length > 0 ? droppedFiles[0] : input.files[0]).name.replace(/^.*[\\\/]/, ''));
                 $.ajax({
                     type: form.getAttribute('method'),
                     url: form.getAttribute("action"),
