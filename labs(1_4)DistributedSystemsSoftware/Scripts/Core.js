@@ -269,6 +269,7 @@ $(function () {
                             window.soundManager.reboot();
                         });
                     }
+                    $(window).trigger("sm2Ready");
 
                     $(".song-name").click(function (elem) {
                         if ($(this).closest("li").find(".song-discription").text() != "") {
