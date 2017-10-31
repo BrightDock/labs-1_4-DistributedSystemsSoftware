@@ -58,9 +58,7 @@
         html5PollingInterval: 50,
         flashVersion: 9
     });
-
-    soundManager.onready(function () {
-
+    $(window).on("sm2Ready", function () {
         var nodes, i, j;
 
         nodes = utils.dom.getAll(playerSelector);
@@ -70,9 +68,7 @@
                 players.push(new Player(nodes[i]));
             }
         }
-
     });
-
     /**
      * player bits
      */

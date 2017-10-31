@@ -261,6 +261,15 @@ $(function () {
                 success: function (result) {
                     $("ul.sm2-playlist-bd").html(result);
 
+                    if (window.soundManager == 'undefined') {
+                        soundManager.beginDelayedInit();
+                    }
+                    else {
+                        soundManager.onready(function () {
+                            window.soundManager.reboot();
+                        });
+                    }
+
                     $(".song-name").click(function (elem) {
                         if ($(this).closest("li").find(".song-discription").text() != "") {
                             $(this).closest("li").toggleClass("expanded");
@@ -466,7 +475,6 @@ $(function () {
                 data.append("SDescription", document.getElementById("sDescription").value);
                 data.append("userID", getCookie('userID'));
                 data.append("lab", (subMenuElem.attr("lr") + +subMenuElem.attr("number")));
-                console.log(droppedFiles);
                 setCookie('file', (droppedFiles.length > 0 ? droppedFiles[0] : input.files[0]).name.replace(/^.*[\\\/]/, ''));
                 $.ajax({
                     type: form.getAttribute('method'),
