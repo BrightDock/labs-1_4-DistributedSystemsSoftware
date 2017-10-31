@@ -261,14 +261,6 @@ $(function () {
                 success: function (result) {
                     $("ul.sm2-playlist-bd").html(result);
 
-                    if (window.soundManager == 'undefined') {
-                        soundManager.beginDelayedInit();
-                    }
-                    else {
-                        soundManager.onready(function () {
-                            window.soundManager.reboot();
-                        });
-                    }
                     $(window).trigger("sm2Ready");
 
                     $(".song-name").click(function (elem) {
